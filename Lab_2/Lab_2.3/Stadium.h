@@ -28,10 +28,10 @@ public:
 	void deserialize();
 	void deserialize(const std::string& filename);
 
+	static void sort(Stadium* arr[], int n);
 	friend std::ostream& operator<< (std::ostream& out, const Stadium& s);
 
 	int getCapacity()const;
 	float getAvgAttendance()const;
-
 };
 

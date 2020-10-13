@@ -19,11 +19,7 @@
 //  среднего процента заполнения за четыре матча.
 #include "Stadium.h"
 #include <iostream>
-#include <algorithm>
-bool comparison(const void* a, const void* b)
-{
-	return(((Stadium*)a)->getAvgAttendance() > ((Stadium*)b)->getAvgAttendance());
-}
+
 int main() {
 	Stadium s1;
 	s1.setAddress("Kiev");
@@ -61,7 +57,7 @@ int main() {
 		}
 	}
 
-	std::sort(stadiums, stadiums + 3, comparison);
+	Stadium::sort(stadiums, 3);
 
 	for (size_t i = 0; i < 3; ++i)
 	{

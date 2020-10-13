@@ -1,6 +1,8 @@
 #include "Stadium.h"
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <cmath>
 Stadium::Stadium() : address_("unknown"), football_club_("unknown"),
 sectors_(0), capacity_(0), attendance_(0.0), avg_attendance_(0.0) {
 	history_of_attendances_.reserve(4);
@@ -88,8 +90,26 @@ void Stadium::deserialize(const std::string& filename){
 	}
 }
 
-int Stadium::getCapacity() const
-{
+void Stadium::sort(Stadium* arr[], int n){
+	//insertion sort
+	int i;
+	Stadium* key;
+	int j;
+	for (i = 1; i < n; ++i)
+	{
+		key = arr[i];
+		j = i - 1;
+		while (j >= 0 && arr[j]->getAvgAttendance() < key->getAvgAttendance())
+		{
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = key;
+	}
+}
+
+
+int Stadium::getCapacity() const{
 	return capacity_;
 }
 

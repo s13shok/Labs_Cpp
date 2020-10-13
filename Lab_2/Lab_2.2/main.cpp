@@ -37,10 +37,11 @@ int main() {
 	char num[] = "3.45";
 	Fraction::printAsFraction(num);
 	std::cout << std::endl;
-	Fraction::printAsFraction(2.22);
+	Fraction::printAsFraction(3.85);
 	std::cout << std::endl;
 
 	std::cout << Fraction::gcd(190, 80) << std::endl; //10
 	std::cout << Fraction::lcm(190, 80) << std::endl; //1520
 	return 0;
+
 }
