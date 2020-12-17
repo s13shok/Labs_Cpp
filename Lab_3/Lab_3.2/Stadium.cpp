@@ -2,20 +2,26 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <cmath>
-Stadium::Stadium() : address_("unknown"), football_club_("unknown"),
-sectors_(0), capacity_(0), attendance_(0.0), avg_attendance_(0.0) {
-	history_of_attendances_.reserve(4);
-}
-Stadium::Stadium(std::string address, std::string footballClub,
-	int sectors, int capacity, float attendance) :
-	address_(address), football_club_(footballClub), sectors_(sectors), capacity_(capacity),
-	attendance_(attendance), avg_attendance_(0.0) {
-	history_of_attendances_.reserve(4);
-}
 
-void Stadium::setAddress(std::string address) {
+Stadium::Stadium() {
+	address_ = "unknown";
+	football_club_ = "unknown";
+	sectors_ = 0;
+	capacity_ = 0;
+	attendance_ = 0.0;
+	avg_attendance_ = 0.0;
+	history_of_attendances_.reserve(4);
+	season_tickets_ = 100;
+}
+Stadium::Stadium(std::string address, std::string footballClub, int sectors, int capacity, float attendance) {
 	address_ = address;
+	football_club_ = footballClub;
+	sectors_ = sectors;
+	capacity_ = capacity;
+	attendance_ = attendance;
+	avg_attendance_ = 0.0;
+	history_of_attendances_.reserve(4);
+	season_tickets_ = 100;
 }
 
 void Stadium::setFootballClub(std::string footballClub) {
@@ -26,33 +32,26 @@ void Stadium::setSectors(int sectors) {
 	sectors_ = sectors;
 }
 
-void Stadium::setCapacity(int capacity) {
-	capacity_ = capacity;
+void Stadium::setSeasonTickets(int season_tickets) {
+	season_tickets_ = season_tickets > 100 ? 100 : season_tickets;
 }
 
-void Stadium::setAttendance(float Attendance) {
-	attendance_ = Attendance;
-}
-
-void Stadium::playGame(int visitors) {
-	history_of_attendances_.push_back(calculateAttendance(visitors));
-	float sum = 0;
-	for (size_t i = 0; i < history_of_attendances_.size(); ++i)
-	{
-		sum += history_of_attendances_[i];
+void Stadium::ticket(){
+	if (season_tickets_ > 0) {
+		season_tickets_--;
+		serialize();
+		std::cout << "Issued season ticket with number: " << 100 - season_tickets_<< std::endl;
 	}
-	avg_attendance_ = sum / history_of_attendances_.size();
-}
-
-float Stadium::calculateAttendance(int visitors)const {
-	return (float)visitors / capacity_ * 100;
+	else {
+		std::cout << "No more season tickets" << std::endl;
+	}
 }
 
 void Stadium::serialize() const {
 	serialize(football_club_);
 }
 
-void Stadium::serialize(const std::string& filename) const{
+void Stadium::serialize(const std::string& filename) const {
 	std::ofstream fout(filename + ".txt");
 	if (fout.is_open())
 	{
@@ -62,15 +61,16 @@ void Stadium::serialize(const std::string& filename) const{
 		fout << capacity_ << std::endl;
 		fout << attendance_ << std::endl;
 		fout << avg_attendance_ << std::endl;
+		fout << season_tickets_ << std::endl;
 		fout.close();
 	}
 }
 
-void Stadium::deserialize(){
+void Stadium::deserialize() {
 	deserialize(football_club_);
 }
 
-void Stadium::deserialize(const std::string& filename){
+void Stadium::deserialize(const std::string& filename) {
 	std::ifstream fin(filename + ".txt");
 	std::string line;
 	if (fin.is_open())
@@ -87,10 +87,12 @@ void Stadium::deserialize(const std::string& filename){
 		attendance_ = atof(line.c_str());
 		std::getline(fin, line);
 		avg_attendance_ = atof(line.c_str());
+		std::getline(fin, line);
+		season_tickets_ = std::stoi(line);
 	}
 }
 
-void Stadium::sort(Stadium* arr[], int n){
+void Stadium::sort(Stadium* arr[], int n) {
 	//insertion sort
 	int i;
 	Stadium* key;
@@ -109,7 +111,7 @@ void Stadium::sort(Stadium* arr[], int n){
 }
 
 
-int Stadium::getCapacity() const{
+int Stadium::getCapacity() const {
 	return capacity_;
 }
 
@@ -121,7 +123,7 @@ std::ostream& operator<<(std::ostream& out, const Stadium& s) {
 	out << "The stadium is in " << s.address_ << std::endl;
 	out << "Home club: " << s.football_club_ << std::endl;
 	out << "Capacity: " << s.capacity_ << std::endl;
-	out << "Average percentage of visits: " << s.avg_attendance_ << std::endl;
+	out << "Number of available season tickets: " << s.season_tickets_ << std::endl;
 
 	return out;
 }

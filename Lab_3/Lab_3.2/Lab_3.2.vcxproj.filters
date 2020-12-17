@@ -21,9 +21,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SportsFacility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Court.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stadium.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SportsFacility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Court.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISeasonTicketProvider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
