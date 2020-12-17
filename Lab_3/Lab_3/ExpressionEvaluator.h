@@ -8,9 +8,6 @@ public:
 	ExpressionEvaluator(size_t n);
 	virtual ~ExpressionEvaluator();
 
-	virtual void logToScreen() const override = 0;
-	virtual void logToFile(const std::string& filename) const override = 0;
-
 	virtual double calculate() const = 0;
 
 	void setOperand(size_t pos, double value);
@@ -19,4 +16,3 @@ protected:
 	size_t n_;
 	double* operands_;
 };
-
