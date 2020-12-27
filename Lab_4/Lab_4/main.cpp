@@ -24,6 +24,14 @@
 #include "Deck.h"
 #include "Dealer.h"
 int main() {
-
+	Dealer d;
+	d.shuffleDecks();
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 52; j++)
+		{
+			std::cout<<*(d.getDeck(i)->getCard(j))<<' ';
+		}
+	}
 	return 0;
 }

@@ -13,11 +13,11 @@ void Dealer::shuffleDecks(){
 	int pos, pos2;
 	for (size_t i = 0; i < 4; i++)
 	{
-		for (size_t j = 0; j < 52; j++)
+		std::srand(i);
+		for (size_t j = 0; j < 208; j++)
 		{
-			std::srand(std::time(0));
-			pos = rand() % 52;
-			pos2 = rand() % 52;
+			pos = std::rand() % 52;
+			pos2 = std::rand() % 52;
 			decks_[i].swapCards(pos, pos2);
 		}
 	}
