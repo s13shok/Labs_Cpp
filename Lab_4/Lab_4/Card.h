@@ -27,6 +27,8 @@ class Card
 	Suit suit_;
 public:
 	Card(int value, int suit);
+	int getValue();
+	int getSuit();
 	friend std::ostream& operator<<(std::ostream& cout, const Card& card);
 };
 

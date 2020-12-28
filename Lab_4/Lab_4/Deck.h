@@ -8,6 +8,6 @@ public:
 	Deck();
 	int getSize();
 	void swapCards(int first, int second);
-	Card* getCard(int i)const;
+	Card* getCard();
 };
 

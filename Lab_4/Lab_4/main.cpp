@@ -20,18 +20,9 @@
 // Особый вариант игры		Тип игры		Доп. правила 
 //      777					базовый			Трипл
 #include <iostream>
-#include "Card.h"
-#include "Deck.h"
-#include "Dealer.h"
+#include "Game.h"
 int main() {
-	Dealer d;
-	d.shuffleDecks();
-	for (size_t i = 0; i < 4; i++)
-	{
-		for (size_t j = 0; j < 52; j++)
-		{
-			std::cout<<*(d.getDeck(i)->getCard(j))<<' ';
-		}
-	}
+	Game g;
+	g.play();
 	return 0;
 }

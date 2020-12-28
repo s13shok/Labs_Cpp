@@ -1,7 +1,7 @@
 #include "Card.h"
 
 std::ostream& operator<<(std::ostream& out, const Card& card) {
-	if(card.value_<10) {
+	if (card.value_ < 10) {
 		out << (char)(card.value_ + 48) << (char)card.suit_;
 	}
 	else if (card.value_ == 10) {
@@ -25,4 +25,21 @@ std::ostream& operator<<(std::ostream& out, const Card& card) {
 Card::Card(int value, int suit) {
 	value_ = (Card::Value)value;
 	suit_ = (Card::Suit)suit;
+}
+
+int Card::getValue()
+{
+	if (value_ < 11) {
+		return value_;
+	}
+	else if (value_ == 14) {
+		return 11;
+	}
+	else {
+		return 10;
+	}
+}
+
+int Card::getSuit() {
+	return suit_;
 }
