@@ -78,8 +78,11 @@ void Game::dialog() {
 				more();
 			}
 			showTable();
-			actionMenu();
-			select_ = getValue();
+			if (select_ != 0)
+			{
+				actionMenu();
+				select_ = getValue();
+			}
 			break;
 		default:
 			showTable();
